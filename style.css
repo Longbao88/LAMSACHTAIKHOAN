@@ -1,0 +1,100 @@
+
+body {
+  background: url('13665.jpg') no-repeat center center fixed;
+  background-size: cover;
+  font-family: 'Courier New', Courier, monospace;
+  color: #fff;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 800px;
+  margin: 50px auto;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.8);
+}
+
+.logo-container {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.logo {
+  width: 200px;
+  height: auto;
+}
+
+h1 {
+  font-size: 36px;
+  color: #ff6600;
+  text-shadow: 0 0 20px red, 0 0 30px gold;
+}
+
+.input-container input {
+  padding: 14px;
+  font-size: 20px;
+  width: 40%;
+  margin: 10px;
+  background-color: #333;
+  border: 2px solid #00ff00;
+  color: #00ff00;
+  border-radius: 5px;
+}
+
+.input-container button {
+  padding: 14px 28px;
+  font-size: 20px;
+  background-color: #00ff00;
+  color: #000;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.input-container button:hover {
+  background-color: #00cc00;
+}
+
+.log {
+  margin-top: 30px;
+  font-size: 18px;
+  white-space: pre-wrap;
+  text-align: left;
+  height: 350px;
+  overflow-y: scroll;
+  background-color: #111;
+  color: #00ff00;
+  border: 2px solid #00ff00;
+  padding: 10px;
+  border-radius: 10px;
+  font-family: 'Courier New', Courier, monospace;
+  box-shadow: 0 0 15px rgba(0, 255, 0, 0.7);
+}
+
+.red-text {
+  color: red;
+}
+
+.banner {
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 20px;
+  text-align: center;
+  color: #ffd700;
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 20px;
+  border-radius: 10px;
+  border: 2px solid #ff6600;
+}
+
+.banner a {
+  color: #ff6600;
+  text-decoration: underline;
+}
+
+.banner a:hover {
+  color: #fff;
+}
