@@ -1,49 +1,73 @@
 
-document.getElementById('startBtn').addEventListener('click', startChecking);
+// Load code list từ codes.js
+document.write('<script src="codes.js"><\/script>');
 
-function startChecking() {
-  let username = document.getElementById('username').value;
-  let code = document.getElementById('code').value;
+document.addEventListener('DOMContentLoaded', function () {
+  const startBtn = document.getElementById('startBtn');
+  startBtn.addEventListener('click', startChecking);
 
-  if (!username || !code) {
-    alert('Vui lòng nhập cả tài khoản và mã code!');
-    return;
-  }
+  function startChecking() {
+    let username = document.getElementById('username').value;
+    let code = document.getElementById('code').value;
 
-  let logDiv = document.getElementById('log');
-  logDiv.innerHTML = "";  // Clear previous logs
-
-  // New log sequence as requested with error messages in red
-  let logMessages = [
-    "ĐANG KIỂM TRA TÀI KHOẢN...",
-    "<span class='red-text'>LỖI TÀI KHOẢN...404</span>",
-    "LỖI 501",
-    "<span class='red-text'>LỖI 300</span>",
-    "LỖI NHIỀU TÀI KHOẢN 404",
-    "ĐANG KHÔI PHỤC IP TÀI KHOẢN.............",
-    "ĐANG THAY THẾ IP MỚI................",
-    "ĐANG XÓA CACHE..................",
-    "ĐANG LÀM MỚI SẢNH GAME.............",
-    "ĐANG TIỀN HÀNH XÓA...............",
-    "ĐÃ XÓA XONG...",
-    "ĐANG TIẾN HÀNH KHÔI PHỤC TÀI KHOẢN CỦA BẠN...",
-    "1.100.233.1",
-    "900.444.112.333",
-    "100.1.2.6",
-    "ĐÃ KHÔI PHỤC....",
-    "<span class='red-text'>TÀI KHOẢN CỦA BẠN ĐÃ SẠCH HÃY VÔ GAME !</span>"
-  ];
-
-  let index = 0;
-
-  function showNextLog() {
-    if (index < logMessages.length) {
-      logDiv.innerHTML += logMessages[index] + '\n';
-      logDiv.scrollTop = logDiv.scrollHeight;  // Scroll to bottom
-      index++;
-      setTimeout(showNextLog, 1500);  // Wait 1.5 seconds between logs
+    if (!username || !code) {
+      alert('Vui lòng nhập cả tài khoản và mã code!');
+      return;
     }
-  }
 
-  showNextLog();
-}
+    if (!validCodes.includes(code.trim().toUpperCase())) {
+      alert('Mã code không hợp lệ!');
+      return;
+    }
+
+    const logDiv = document.getElementById('log');
+    logDiv.innerHTML = '';
+
+    const progressBar = document.createElement('div');
+    const progressFill = document.createElement('div');
+    const progressText = document.createElement('div');
+
+    progressBar.className = 'progress-bar';
+    progressFill.className = 'progress-fill';
+    progressText.className = 'progress-text';
+
+    progressBar.appendChild(progressFill);
+    progressBar.appendChild(progressText);
+    logDiv.appendChild(progressBar);
+
+    const logMessages = [
+      "ĐANG KIỂM TRA TÀI KHOẢN",
+      "ĐANG KIỂM TRA IP HIỆN TẠI : 101.111.2.3",
+      "<span class='red-text'>ĐANG KIỂM TRA LỖI ĐĂNG NHẬP NHIỀU TÀI KHOẢN</span>",
+      "<span class='red-text'>ĐANG KIỂM TRA LỊCH SỬ THẮNG GẦN NHẤT</span>",
+      "<span class='red-text'>PHÁT HIỆN LỖI 404</span>",
+      "<span class='red-text'>PHÁT HIỆN LỖI 100</span>",
+      "ĐANG THAY THẾ IP MỚI",
+      "ĐANG TRÁNH TƯỜNG LỬA SẢNH GAME",
+      "ĐANG LÀM MỚI TÀI KHOẢN",
+      "ĐANG KHÔI PHỤC TÀI KHOẢN",
+      "ĐÃ HOÀN THÀNH....",
+      "<strong>HÃY VÔ GAME !</strong>"
+    ];
+
+    let index = 0;
+    let progress = 0;
+    const step = 100 / logMessages.length;
+
+    const interval = setInterval(() => {
+      if (index < logMessages.length) {
+        const p = document.createElement('p');
+        p.innerHTML = logMessages[index];
+        logDiv.appendChild(p);
+        logDiv.scrollTop = logDiv.scrollHeight;
+        index++;
+
+        progress = Math.min(progress + step, 100);
+        progressFill.style.width = progress + "%";
+        progressText.innerText = Math.round(progress) + "%";
+      } else {
+        clearInterval(interval);
+      }
+    }, 1200);
+  }
+});
